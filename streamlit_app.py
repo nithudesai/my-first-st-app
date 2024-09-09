@@ -16,7 +16,7 @@ def get_sf_dropdown_values(sql):
 conn = snowflake.connector.connect(**st.secrets["snowflake"])
 
 # populate dropdown values from SF queries - TODO insert more queries
-sql = "select name from FR_ROLES"
+sql = "select fr_name from FR_ROLES"
 testDropDownValues = get_sf_dropdown_values(sql)
 
 # close snowflake connection
