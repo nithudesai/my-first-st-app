@@ -1,9 +1,27 @@
 import streamlit as st
+import snowflake.connector
 
 st.title("🎈 My new app")
 st.write(
     "Let's start building! For help and inspiration, head over [docs.streamlit.io](https://docs.streamlit.io/)."
 )
+
+# execute SF queries
+def get_sf_dropdown_values(sql):
+    with conn.cursor() as cursor:
+        cursor.execute(sql)
+        return cursor.fetch_pandas_all()
+        
+# open snowflake connection
+conn = snowflake.connector.connect(**st.secrets["snowflake"])
+
+# populate dropdown values from SF queries - TODO insert more queries
+sql = "select name from FR_ROLES"
+testDropDownValues = get_sf_dropdown_values(sql)
+
+# close snowflake connection
+conn.close()
+
 # create form
 st.header('Snowflake Role Request Form')
 with st.form("form1", clear_on_submit = True):
@@ -47,6 +65,12 @@ with st.form("form1", clear_on_submit = True):
     removeFunctionalRoleFromServiceAccountRole = st.radio(
         "Remove functional role(s) from service account role(s)?",
         ["Yes", "No"],
+        index=None,
+    )
+
+    testSnowflakeValues = st.selectbox(
+        "Dropdown Values from Snowflake",
+        (testDropDownValues),
         index=None,
     )
 
