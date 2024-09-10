@@ -16,8 +16,11 @@ def get_sf_dropdown_values(sql):
 conn = snowflake.connector.connect(**st.secrets["snowflake"])
 
 # populate dropdown values from SF queries - TODO insert more queries
-sql = "select fr_name from FR_ROLES"
-testDropDownValues = get_sf_dropdown_values(sql)
+sql = "select name from FR_ROLES"
+FRValues = get_sf_dropdown_values(sql)
+
+sql = "select name from PRJ_ROLES"
+Prj_Roles_Values = get_sf_dropdown_values(sql)
 
 # close snowflake connection
 conn.close()
@@ -52,7 +55,7 @@ with st.form("form1", clear_on_submit = True):
     )
 
     addFunctionalRoleToServiceAccountRole = st.radio(
-        "Add functional role(s) to service account role(s)?",
+        "Add functional/project role(s) to service account role(s)?",
         ["Yes", "No"],
         index=None,
     )
@@ -68,9 +71,15 @@ with st.form("form1", clear_on_submit = True):
         index=None,
     )
 
-    testSnowflakeValues = st.selectbox(
-        "Dropdown Values from Snowflake",
-        (testDropDownValues),
+    FrRoleValues = st.selectbox(
+        "Choose functional roles",
+        (FRValues),
+        index=None,
+    )
+
+    PrjRoleValues = st.selectbox(
+        "Choose Project roles",
+        (Prj_Roles_Values),
         index=None,
     )
 
