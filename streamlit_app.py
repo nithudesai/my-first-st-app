@@ -89,7 +89,7 @@ with st.form("form1", clear_on_submit = True):
     #)
 
     PrjRoleValues = col2.selectbox(
-        "Choose a Project role",
+        "Choose a target Project role",
         (Prj_Roles_Values),
         index=None,
     )
@@ -105,7 +105,7 @@ with st.form("form1", clear_on_submit = True):
     )
 
     SvcRoleValues = st.selectbox(
-        "Choose a Service Acct role",
+        "Choose a target Service Acct role",
         (Svc_Roles_Values),
         index=None,
     )
