@@ -76,16 +76,28 @@ with st.form("form1", clear_on_submit = True):
         index=None,
     )
 
-    FrRoleValues = st.multiselect(
+    col1, col2 = st.columns(2)
+
+    FrRoleValues = col1.multiselect(
         "Choose functional role(s)",
         (Func_Roles_Values),
     )
+    
+    #FrRoleValues = st.multiselect(
+    #    "Choose functional role(s)",
+    #    (Func_Roles_Values),
+    #)
 
-    PrjRoleValues = st.selectbox(
+    PrjRoleValues = col2.selectbox(
         "Choose a Project role",
         (Prj_Roles_Values),
         index=None,
     )
+    #PrjRoleValues = st.selectbox(
+    #    "Choose a Project role",
+    #    (Prj_Roles_Values),
+    #    index=None,
+    #)
 
     FrPrRoleValues = st.multiselect(
         "Choose functional/project role(s)",
