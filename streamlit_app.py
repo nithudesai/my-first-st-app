@@ -71,7 +71,7 @@ with st.form("form1", clear_on_submit = True):
         index=None,
     )
 
-    FrRoleValues = st.selectbox(
+    FrRoleValues = st.multiselect(
         "Choose functional roles",
         (FRValues),
         index=None,
